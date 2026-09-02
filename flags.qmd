@@ -1,0 +1,56 @@
+---
+title: "World Flags"
+format: html
+execute:
+  echo: false
+---
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse)
+library(countrycode)
+
+# Get all flag codes from the data directory
+flag_files <- list.files("data", pattern = "\\.png$")
+codes <- sub("\\.png$", "", flag_files)
+
+# Look up country names for the codes
+countries <- tibble(
+  code = codes,
+  name = countrycode(toupper(codes), origin = "iso2c", destination = "country.name")
+) |>
+  mutate(name = if_else(is.na(name), toupper(code), name)) |>
+  arrange(name)
+
+# Pass data to Observable JS
+ojs_define(flag_data = countries)
+```
+
+```{ojs}
+// Dropdown input to select a country
+viewof selected = Inputs.select(
+  flag_data.code,
+  {
+    label: "Country",
+    format: code => {
+      const idx = flag_data.code.indexOf(code);
+      return flag_data.name[idx];
+    },
+    value: "eg"
+  }
+)
+```
+
+```{ojs}
+// Display the selected flag image
+html`
+<div style="margin-top: 1.5rem;">
+  <img 
+    src="data/${selected}.png" 
+    alt="Flag" 
+    style="max-width: 400px; width: 100%; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15);"
+  />
+</div>
+`
+```
