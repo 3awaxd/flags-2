@@ -1,6 +1,11 @@
 ---
-title: "World Flags"
-format: html
+title: "World Flag Explorer"
+subtitle: "Explore national flags and discover flags with similar color palettes and patterns"
+format:
+  html:
+    theme: cosmo
+    toc: false
+    page-layout: full
 execute:
   echo: false
 ---
@@ -11,31 +16,61 @@ execute:
 library(tidyverse)
 library(countrycode)
 
-# Get all flag codes from the data directory
-flag_files <- list.files("data", pattern = "\\.png$")
-codes <- sub("\\.png$", "", flag_files)
+# Load similarity data
+similar_raw <- read_csv("data/similar_flags.csv", show_col_types = FALSE)
 
-# Look up country names for the codes
-countries <- tibble(
-  code = codes,
-  name = countrycode(toupper(codes), origin = "iso2c", destination = "country.name")
-) |>
-  mutate(name = if_else(is.na(name), toupper(code), name)) |>
+# Build country list with full names
+all_codes <- unique(c(similar_raw$code, similar_raw$similar_code))
+
+countries <- tibble(code = all_codes) |>
+  mutate(
+    name = countrycode(toupper(code), origin = "iso2c", destination = "country.name", warn = FALSE),
+    continent = countrycode(toupper(code), origin = "iso2c", destination = "continent", warn = FALSE)
+  ) |>
+  mutate(
+    name = case_when(
+      code == "gb-eng" ~ "England",
+      code == "gb-sct" ~ "Scotland",
+      code == "gb-wls" ~ "Wales",
+      code == "gb-nir" ~ "Northern Ireland",
+      code == "xk" ~ "Kosovo",
+      code == "bv" ~ "Bouvet Island",
+      code == "sj" ~ "Svalbard & Jan Mayen",
+      code == "um" ~ "U.S. Outlying Islands",
+      is.na(name) ~ toupper(code),
+      TRUE ~ name
+    ),
+    continent = if_else(is.na(continent), "Other", continent)
+  ) |>
   arrange(name)
 
-# Pass data to Observable JS
-ojs_define(flag_data = countries)
+# Add country names to similarity pairs
+similar_df <- similar_raw |>
+  left_join(countries |> select(code, name), by = "code") |>
+  left_join(countries |> select(similar_code = code, similar_name = name), by = "similar_code")
+
+# Export to Observable JS
+ojs_define(
+  countries_meta = countries,
+  similarity_meta = similar_df
+)
 ```
 
 ```{ojs}
-// Dropdown input to select a country
-viewof selected = Inputs.select(
-  flag_data.code,
+// Transform input data
+countries = transpose(countries_meta)
+similarities = transpose(similarity_meta)
+```
+
+```{ojs}
+// Searchable / selectable dropdown
+viewof selected_code = Inputs.select(
+  countries.map(d => d.code),
   {
-    label: "Country",
+    label: "Choose a Country:",
     format: code => {
-      const idx = flag_data.code.indexOf(code);
-      return flag_data.name[idx];
+      const item = countries.find(d => d.code === code);
+      return item ? `${item.name} (${item.continent})` : code;
     },
     value: "eg"
   }
@@ -43,14 +78,118 @@ viewof selected = Inputs.select(
 ```
 
 ```{ojs}
-// Display the selected flag image
+selected_country = countries.find(d => d.code === selected_code)
+top_similar = similarities.filter(d => d.code === selected_code).slice(0, 4)
+```
+
+```{ojs}
 html`
-<div style="margin-top: 1.5rem;">
-  <img 
-    src="data/${selected}.png" 
-    alt="Flag" 
-    style="max-width: 400px; width: 100%; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15);"
-  />
+<style>
+  .flag-container {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin-top: 1.5rem;
+  }
+  .main-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
+    margin-bottom: 2rem;
+    max-width: 600px;
+  }
+  .main-flag-img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  .similar-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .similar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+  .similar-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .similar-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  }
+  .similar-flag-img {
+    width: 100%;
+    height: 120px;
+    object-fit: contain;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+  }
+  .match-badge {
+    display: inline-block;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    margin-bottom: 0.5rem;
+  }
+  .card-country-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #0f172a;
+    margin: 0;
+  }
+</style>
+
+<div class="flag-container">
+  <div class="main-card">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
+      <h3 style="margin: 0; font-size: 1.5rem; color: #0f172a;">${selected_country.name}</h3>
+      <span style="font-size: 0.875rem; color: #64748b; font-weight: 500;">${selected_country.continent} &bull; <code>${selected_country.code.toUpperCase()}</code></span>
+    </div>
+    <img 
+      class="main-flag-img" 
+      src="data/${selected_country.code}.png" 
+      alt="Flag of ${selected_country.name}" 
+    />
+  </div>
+
+  <div class="similar-section-title">
+    <span>Flags with Similar Visuals & Colors</span>
+  </div>
+
+  <div class="similar-grid">
+    ${top_similar.map(item => `
+      <div class="similar-card">
+        <span class="match-badge">Match #${item.rank}</span>
+        <img 
+          class="similar-flag-img" 
+          src="data/${item.similar_code}.png" 
+          alt="Flag of ${item.similar_name}" 
+        />
+        <p class="card-country-name">${item.similar_name}</p>
+      </div>
+    `).join('')}
+  </div>
 </div>
 `
 ```
