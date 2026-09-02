@@ -201,10 +201,9 @@ ojs_define(
     margin: 0 0 1rem 0;
   }
   .flag-pair-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     gap: 0.75rem;
-    justify-content: flex-start;
     align-items: stretch;
   }
   .mini-flag-item {
@@ -216,14 +215,12 @@ ojs_define(
     flex-direction: column;
     align-items: center;
     gap: 0.4rem;
-    flex: 1 1 calc(50% - 0.75rem);
-    min-width: 105px;
     text-align: center;
   }
   .bottom-flag-img {
     width: 100%;
-    max-width: 110px;
-    height: 60px;
+    max-width: 100px;
+    height: 55px;
     object-fit: contain;
     background: #ffffff;
     border: 1px solid #cbd5e1;
@@ -449,99 +446,99 @@ html`
 
 ### 🎨 Famous Flag Families & High-Similarity Pairs
 
-::: {.grid}
-
-::: {.g-col-12 .g-col-md-6}
-<div class="family-card">
-  <div class="family-title">🇮🇪 Ireland vs. 🇨🇮 Côte d'Ivoire</div>
-  <div class="family-desc">Mirror opposites across the vertical tricolor axis.</div>
-  <div class="flag-pair-container">
-    <div class="mini-flag-item">
-      <img src="data/ie.png" alt="Ireland flag" class="bottom-flag-img" />
-      <span class="mini-flag-label">Ireland</span>
-      <span class="mini-flag-sub">Green • White • Orange</span>
+```{=html}
+<div class="row g-3">
+  <div class="col-12 col-md-6">
+    <div class="family-card">
+      <div class="family-title">🇮🇪 Ireland vs. 🇨🇮 Côte d'Ivoire</div>
+      <div class="family-desc">Mirror opposites across the vertical tricolor axis.</div>
+      <div class="flag-pair-container">
+        <div class="mini-flag-item">
+          <img src="data/ie.png" alt="Ireland flag" class="bottom-flag-img" />
+          <span class="mini-flag-label">Ireland</span>
+          <span class="mini-flag-sub">Green • White • Orange</span>
+        </div>
+        <div class="mini-flag-item">
+          <img src="data/ci.png" alt="Côte d'Ivoire flag" class="bottom-flag-img" />
+          <span class="mini-flag-label">Côte d'Ivoire</span>
+          <span class="mini-flag-sub">Orange • White • Green</span>
+        </div>
+      </div>
     </div>
-    <div class="mini-flag-item">
-      <img src="data/ci.png" alt="Côte d'Ivoire flag" class="bottom-flag-img" />
-      <span class="mini-flag-label">Côte d'Ivoire</span>
-      <span class="mini-flag-sub">Orange • White • Green</span>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <div class="family-card">
+      <div class="family-title">🇳🇱 Netherlands vs. 🇱🇺 Luxembourg</div>
+      <div class="family-desc">Different shades of blue and ratio dimensions.</div>
+      <div class="flag-pair-container">
+        <div class="mini-flag-item">
+          <img src="data/nl.png" alt="Netherlands flag" class="bottom-flag-img" />
+          <span class="mini-flag-label">Netherlands</span>
+          <span class="mini-flag-sub">Cobalt Blue (2:3)</span>
+        </div>
+        <div class="mini-flag-item">
+          <img src="data/lu.png" alt="Luxembourg flag" class="bottom-flag-img" />
+          <span class="mini-flag-label">Luxembourg</span>
+          <span class="mini-flag-sub">Sky Blue (1:2)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <div class="family-card">
+      <div class="family-title">🇪🇬 Pan-Arab Colors</div>
+      <div class="family-desc">Sharing the iconic red-white-black tricolor base.</div>
+      <div class="flag-pair-container">
+        <div class="mini-flag-item">
+          <img src="data/eg.png" alt="Egypt flag" class="bottom-flag-img" />
+          <span class="mini-flag-label">Egypt</span>
+          <span class="mini-flag-sub">Golden Eagle</span>
+        </div>
+        <div class="mini-flag-item">
+          <img src="data/ye.png" alt="Yemen flag" class="bottom-flag-img" />
+          <span class="mini-flag-label">Yemen</span>
+          <span class="mini-flag-sub">Plain Tricolor</span>
+        </div>
+        <div class="mini-flag-item">
+          <img src="data/sy.png" alt="Syria flag" class="bottom-flag-img" />
+          <span class="mini-flag-label">Syria</span>
+          <span class="mini-flag-sub">Two Green Stars</span>
+        </div>
+        <div class="mini-flag-item">
+          <img src="data/iq.png" alt="Iraq flag" class="bottom-flag-img" />
+          <span class="mini-flag-label">Iraq</span>
+          <span class="mini-flag-sub">Takbir Script</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <div class="family-card">
+      <div class="family-title">🇨🇴 Gran Colombia Family</div>
+      <div class="family-desc">Sharing the yellow-blue-red stripes from Miranda's design.</div>
+      <div class="flag-pair-container">
+        <div class="mini-flag-item">
+          <img src="data/co.png" alt="Colombia flag" class="bottom-flag-img" />
+          <span class="mini-flag-label">Colombia</span>
+          <span class="mini-flag-sub">Plain Tricolor</span>
+        </div>
+        <div class="mini-flag-item">
+          <img src="data/ec.png" alt="Ecuador flag" class="bottom-flag-img" />
+          <span class="mini-flag-label">Ecuador</span>
+          <span class="mini-flag-sub">Coat of Arms</span>
+        </div>
+        <div class="mini-flag-item">
+          <img src="data/ve.png" alt="Venezuela flag" class="bottom-flag-img" />
+          <span class="mini-flag-label">Venezuela</span>
+          <span class="mini-flag-sub">Arc of 8 Stars</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-:::
-
-::: {.g-col-12 .g-col-md-6}
-<div class="family-card">
-  <div class="family-title">🇳🇱 Netherlands vs. 🇱🇺 Luxembourg</div>
-  <div class="family-desc">Different shades of blue and ratio dimensions.</div>
-  <div class="flag-pair-container">
-    <div class="mini-flag-item">
-      <img src="data/nl.png" alt="Netherlands flag" class="bottom-flag-img" />
-      <span class="mini-flag-label">Netherlands</span>
-      <span class="mini-flag-sub">Cobalt Blue (2:3)</span>
-    </div>
-    <div class="mini-flag-item">
-      <img src="data/lu.png" alt="Luxembourg flag" class="bottom-flag-img" />
-      <span class="mini-flag-label">Luxembourg</span>
-      <span class="mini-flag-sub">Sky Blue (1:2)</span>
-    </div>
-  </div>
-</div>
-:::
-
-::: {.g-col-12 .g-col-md-6}
-<div class="family-card">
-  <div class="family-title">🇪🇬 Pan-Arab Colors</div>
-  <div class="family-desc">Sharing the iconic red-white-black tricolor base.</div>
-  <div class="flag-pair-container">
-    <div class="mini-flag-item">
-      <img src="data/eg.png" alt="Egypt flag" class="bottom-flag-img" />
-      <span class="mini-flag-label">Egypt</span>
-      <span class="mini-flag-sub">Golden Eagle</span>
-    </div>
-    <div class="mini-flag-item">
-      <img src="data/ye.png" alt="Yemen flag" class="bottom-flag-img" />
-      <span class="mini-flag-label">Yemen</span>
-      <span class="mini-flag-sub">Plain Tricolor</span>
-    </div>
-    <div class="mini-flag-item">
-      <img src="data/sy.png" alt="Syria flag" class="bottom-flag-img" />
-      <span class="mini-flag-label">Syria</span>
-      <span class="mini-flag-sub">Two Green Stars</span>
-    </div>
-    <div class="mini-flag-item">
-      <img src="data/iq.png" alt="Iraq flag" class="bottom-flag-img" />
-      <span class="mini-flag-label">Iraq</span>
-      <span class="mini-flag-sub">Takbir Script</span>
-    </div>
-  </div>
-</div>
-:::
-
-::: {.g-col-12 .g-col-md-6}
-<div class="family-card">
-  <div class="family-title">🇨🇴 Gran Colombia Family</div>
-  <div class="family-desc">Sharing the yellow-blue-red stripes from Miranda's design.</div>
-  <div class="flag-pair-container">
-    <div class="mini-flag-item">
-      <img src="data/co.png" alt="Colombia flag" class="bottom-flag-img" />
-      <span class="mini-flag-label">Colombia</span>
-      <span class="mini-flag-sub">Plain Tricolor</span>
-    </div>
-    <div class="mini-flag-item">
-      <img src="data/ec.png" alt="Ecuador flag" class="bottom-flag-img" />
-      <span class="mini-flag-label">Ecuador</span>
-      <span class="mini-flag-sub">Coat of Arms</span>
-    </div>
-    <div class="mini-flag-item">
-      <img src="data/ve.png" alt="Venezuela flag" class="bottom-flag-img" />
-      <span class="mini-flag-label">Venezuela</span>
-      <span class="mini-flag-sub">Arc of 8 Stars</span>
-    </div>
-  </div>
-</div>
-:::
-
-:::
+```
 
 :::
