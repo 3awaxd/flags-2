@@ -89,7 +89,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Page Contents</h2>
    
   <ul class="collapse">
   <li><a href="#interactive-flag-similarity-finder" id="toc-interactive-flag-similarity-finder" class="nav-link active" data-scroll-target="#interactive-flag-similarity-finder">🔍 Interactive Flag Similarity Finder</a></li>
@@ -136,6 +136,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     background: transparent;
   }
   
+  /* Polished Table of Contents */
+  #TOC, .quarto-sidebar, nav#TOC {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(8px) !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 1.2rem !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05) !important;
+  }
+  #toc-title {
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    margin-bottom: 0.75rem !important;
+    border-bottom: 2px solid #0284c7 !important;
+    padding-bottom: 0.4rem !important;
+  }
+  nav#TOC ul {
+    list-style: none !important;
+    padding-left: 0.25rem !important;
+  }
+  nav#TOC li {
+    margin: 0.45rem 0 !important;
+  }
+  nav#TOC a {
+    color: #475569 !important;
+    text-decoration: none !important;
+    font-size: 0.88rem !important;
+    font-weight: 500 !important;
+    transition: all 0.15s ease !important;
+    border-left: 2px solid transparent !important;
+    padding-left: 0.5rem !important;
+  }
+  nav#TOC a:hover, nav#TOC a.active {
+    color: #0284c7 !important;
+    border-left-color: #0284c7 !important;
+    font-weight: 600 !important;
+  }
+
   .hero-banner {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0369a1 100%);
     color: #ffffff;
@@ -162,9 +203,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 
   .content-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    border: 1px solid rgba(226, 232, 240, 0.9);
     border-radius: 14px;
     padding: 1.75rem;
     box-shadow: 0 4px 15px -2px rgba(0, 0, 0, 0.05);
@@ -177,6 +218,77 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     overflow: hidden;
     border: 1px solid #e2e8f0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    margin-bottom: 1.5rem;
+  }
+  .table-card table {
+    margin-bottom: 0 !important;
+  }
+  .table-card td {
+    vertical-align: middle !important;
+  }
+
+  /* Non-overlapping Bottom Family Cards */
+  .family-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .family-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.4rem 0;
+  }
+  .family-desc {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0 0 1rem 0;
+  }
+  .flag-pair-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  .mini-flag-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.6rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 1 1 calc(50% - 0.75rem);
+    min-width: 105px;
+    text-align: center;
+  }
+  .bottom-flag-img {
+    width: 100%;
+    max-width: 110px;
+    height: 60px;
+    object-fit: contain;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 2px;
+  }
+  .mini-flag-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.2;
+  }
+  .mini-flag-sub {
+    font-size: 0.72rem;
+    color: #64748b;
   }
 </style>
 
@@ -193,8 +305,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Select any country to view its official flag and discover the flags with the closest visual patterns and color palettes.</p>
 <div class="content-card">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="149" data-source-offset="-30"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 148;"><span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> <span class="fu">transpose</span>(countries_meta)</span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>similarities <span class="op">=</span> <span class="fu">transpose</span>(similarity_meta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="261" data-source-offset="-30"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 260;"><span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> <span class="fu">transpose</span>(countries_meta)</span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>similarities <span class="op">=</span> <span class="fu">transpose</span>(similarity_meta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-1-1" data-nodetype="declaration">
@@ -211,17 +323,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="153" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 152;"><span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>viewof selected_code <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>(</span>
-<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>  countries<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">code</span>)<span class="op">,</span></span>
-<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Select Country:"</span><span class="op">,</span></span>
-<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>    <span class="dt">format</span><span class="op">:</span> code <span class="kw">=&gt;</span> {</span>
-<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> item <span class="op">=</span> countries<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">code</span> <span class="op">===</span> code)<span class="op">;</span></span>
-<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> item <span class="op">?</span> <span class="vs">`</span><span class="sc">${</span>item<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs"> (</span><span class="sc">${</span>item<span class="op">.</span><span class="at">continent</span><span class="sc">}</span><span class="vs">)`</span> <span class="op">:</span> code<span class="op">;</span></span>
-<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
-<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>    <span class="dt">value</span><span class="op">:</span> <span class="st">"eg"</span></span>
-<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="265" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 264;"><span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a>viewof selected_code <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>(</span>
+<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a>  countries<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">code</span>)<span class="op">,</span></span>
+<span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Select Country:"</span><span class="op">,</span></span>
+<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a>    <span class="dt">format</span><span class="op">:</span> code <span class="kw">=&gt;</span> {</span>
+<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> item <span class="op">=</span> countries<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">code</span> <span class="op">===</span> code)<span class="op">;</span></span>
+<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> item <span class="op">?</span> <span class="vs">`</span><span class="sc">${</span>item<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs"> (</span><span class="sc">${</span>item<span class="op">.</span><span class="at">continent</span><span class="sc">}</span><span class="vs">)`</span> <span class="op">:</span> code<span class="op">;</span></span>
+<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a>    <span class="dt">value</span><span class="op">:</span> <span class="st">"eg"</span></span>
+<span id="cb2-274"><a href="#cb2-274" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-275"><a href="#cb2-275" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-2" data-nodetype="declaration">
 
@@ -229,8 +341,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="168" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 167;"><span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>selected_country <span class="op">=</span> countries<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">code</span> <span class="op">===</span> selected_code)</span>
-<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>top_similar <span class="op">=</span> similarities<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">code</span> <span class="op">===</span> selected_code)<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="280" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 279;"><span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a>selected_country <span class="op">=</span> countries<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">code</span> <span class="op">===</span> selected_code)</span>
+<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a>top_similar <span class="op">=</span> similarities<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">code</span> <span class="op">===</span> selected_code)<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-3-1" data-nodetype="declaration">
@@ -247,145 +359,145 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="172" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 171;"><span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`</span></span>
-<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;style&gt;</span></span>
-<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a><span class="vs">  .flag-app {</span></span>
-<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;</span></span>
-<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin-top: 1.25rem;</span></span>
-<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a><span class="vs">  .main-flag-card {</span></span>
-<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #f8fafc;</span></span>
-<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a><span class="vs">    border: 1px solid #e2e8f0;</span></span>
-<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 12px;</span></span>
-<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 1.5rem;</span></span>
-<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a><span class="vs">    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);</span></span>
-<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a><span class="vs">    max-width: 520px;</span></span>
-<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin-bottom: 2rem;</span></span>
-<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a><span class="vs">  .main-img {</span></span>
-<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a><span class="vs">    width: 100%;</span></span>
-<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a><span class="vs">    max-height: 270px;</span></span>
-<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a><span class="vs">    object-fit: contain;</span></span>
-<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #ffffff;</span></span>
-<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a><span class="vs">    border: 1px solid #cbd5e1;</span></span>
-<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 8px;</span></span>
-<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 4px;</span></span>
-<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a><span class="vs">  .similar-heading {</span></span>
-<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-size: 1.2rem;</span></span>
-<span id="cb4-198"><a href="#cb4-198" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-weight: 700;</span></span>
-<span id="cb4-199"><a href="#cb4-199" aria-hidden="true" tabindex="-1"></a><span class="vs">    color: #0f172a;</span></span>
-<span id="cb4-200"><a href="#cb4-200" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin-bottom: 1rem;</span></span>
-<span id="cb4-201"><a href="#cb4-201" aria-hidden="true" tabindex="-1"></a><span class="vs">    display: flex;</span></span>
-<span id="cb4-202"><a href="#cb4-202" aria-hidden="true" tabindex="-1"></a><span class="vs">    align-items: center;</span></span>
-<span id="cb4-203"><a href="#cb4-203" aria-hidden="true" tabindex="-1"></a><span class="vs">    gap: 0.5rem;</span></span>
-<span id="cb4-204"><a href="#cb4-204" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-205"><a href="#cb4-205" aria-hidden="true" tabindex="-1"></a><span class="vs">  .similar-grid {</span></span>
-<span id="cb4-206"><a href="#cb4-206" aria-hidden="true" tabindex="-1"></a><span class="vs">    display: grid;</span></span>
-<span id="cb4-207"><a href="#cb4-207" aria-hidden="true" tabindex="-1"></a><span class="vs">    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));</span></span>
-<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a><span class="vs">    gap: 1.25rem;</span></span>
-<span id="cb4-209"><a href="#cb4-209" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-210"><a href="#cb4-210" aria-hidden="true" tabindex="-1"></a><span class="vs">  .similar-card {</span></span>
-<span id="cb4-211"><a href="#cb4-211" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #ffffff;</span></span>
-<span id="cb4-212"><a href="#cb4-212" aria-hidden="true" tabindex="-1"></a><span class="vs">    border: 1px solid #e2e8f0;</span></span>
-<span id="cb4-213"><a href="#cb4-213" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 10px;</span></span>
-<span id="cb4-214"><a href="#cb4-214" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 1rem;</span></span>
-<span id="cb4-215"><a href="#cb4-215" aria-hidden="true" tabindex="-1"></a><span class="vs">    box-shadow: 0 2px 5px rgba(0,0,0,0.04);</span></span>
-<span id="cb4-216"><a href="#cb4-216" aria-hidden="true" tabindex="-1"></a><span class="vs">    display: flex;</span></span>
-<span id="cb4-217"><a href="#cb4-217" aria-hidden="true" tabindex="-1"></a><span class="vs">    flex-direction: column;</span></span>
-<span id="cb4-218"><a href="#cb4-218" aria-hidden="true" tabindex="-1"></a><span class="vs">    justify-content: space-between;</span></span>
-<span id="cb4-219"><a href="#cb4-219" aria-hidden="true" tabindex="-1"></a><span class="vs">    transition: transform 0.18s ease, box-shadow 0.18s ease;</span></span>
-<span id="cb4-220"><a href="#cb4-220" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-221"><a href="#cb4-221" aria-hidden="true" tabindex="-1"></a><span class="vs">  .similar-card:hover {</span></span>
-<span id="cb4-222"><a href="#cb4-222" aria-hidden="true" tabindex="-1"></a><span class="vs">    box-shadow: 0 8px 18px rgba(0,0,0,0.09);</span></span>
-<span id="cb4-223"><a href="#cb4-223" aria-hidden="true" tabindex="-1"></a><span class="vs">    transform: translateY(-3px);</span></span>
-<span id="cb4-224"><a href="#cb4-224" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-225"><a href="#cb4-225" aria-hidden="true" tabindex="-1"></a><span class="vs">  .similar-img {</span></span>
-<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a><span class="vs">    width: 100%;</span></span>
-<span id="cb4-227"><a href="#cb4-227" aria-hidden="true" tabindex="-1"></a><span class="vs">    height: 110px;</span></span>
-<span id="cb4-228"><a href="#cb4-228" aria-hidden="true" tabindex="-1"></a><span class="vs">    object-fit: contain;</span></span>
-<span id="cb4-229"><a href="#cb4-229" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #f8fafc;</span></span>
-<span id="cb4-230"><a href="#cb4-230" aria-hidden="true" tabindex="-1"></a><span class="vs">    border: 1px solid #e2e8f0;</span></span>
-<span id="cb4-231"><a href="#cb4-231" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 6px;</span></span>
-<span id="cb4-232"><a href="#cb4-232" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 3px;</span></span>
-<span id="cb4-233"><a href="#cb4-233" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin-bottom: 0.75rem;</span></span>
-<span id="cb4-234"><a href="#cb4-234" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-235"><a href="#cb4-235" aria-hidden="true" tabindex="-1"></a><span class="vs">  .badge-row {</span></span>
-<span id="cb4-236"><a href="#cb4-236" aria-hidden="true" tabindex="-1"></a><span class="vs">    display: flex;</span></span>
-<span id="cb4-237"><a href="#cb4-237" aria-hidden="true" tabindex="-1"></a><span class="vs">    justify-content: space-between;</span></span>
-<span id="cb4-238"><a href="#cb4-238" aria-hidden="true" tabindex="-1"></a><span class="vs">    align-items: center;</span></span>
-<span id="cb4-239"><a href="#cb4-239" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin-bottom: 0.5rem;</span></span>
-<span id="cb4-240"><a href="#cb4-240" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-241"><a href="#cb4-241" aria-hidden="true" tabindex="-1"></a><span class="vs">  .rank-badge {</span></span>
-<span id="cb4-242"><a href="#cb4-242" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-size: 0.75rem;</span></span>
-<span id="cb4-243"><a href="#cb4-243" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-weight: 600;</span></span>
-<span id="cb4-244"><a href="#cb4-244" aria-hidden="true" tabindex="-1"></a><span class="vs">    color: #475569;</span></span>
-<span id="cb4-245"><a href="#cb4-245" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #f1f5f9;</span></span>
-<span id="cb4-246"><a href="#cb4-246" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 2px 7px;</span></span>
-<span id="cb4-247"><a href="#cb4-247" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 6px;</span></span>
-<span id="cb4-248"><a href="#cb4-248" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-249"><a href="#cb4-249" aria-hidden="true" tabindex="-1"></a><span class="vs">  .pct-badge {</span></span>
-<span id="cb4-250"><a href="#cb4-250" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-size: 0.8rem;</span></span>
-<span id="cb4-251"><a href="#cb4-251" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-weight: 700;</span></span>
-<span id="cb4-252"><a href="#cb4-252" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 2px 8px;</span></span>
-<span id="cb4-253"><a href="#cb4-253" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 9999px;</span></span>
-<span id="cb4-254"><a href="#cb4-254" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-255"><a href="#cb4-255" aria-hidden="true" tabindex="-1"></a><span class="vs">  .pct-high { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }</span></span>
-<span id="cb4-256"><a href="#cb4-256" aria-hidden="true" tabindex="-1"></a><span class="vs">  .pct-mid  { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }</span></span>
-<span id="cb4-257"><a href="#cb4-257" aria-hidden="true" tabindex="-1"></a><span class="vs">  .pct-low  { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }</span></span>
-<span id="cb4-258"><a href="#cb4-258" aria-hidden="true" tabindex="-1"></a><span class="vs">  .progress-bar-bg {</span></span>
-<span id="cb4-259"><a href="#cb4-259" aria-hidden="true" tabindex="-1"></a><span class="vs">    width: 100%;</span></span>
-<span id="cb4-260"><a href="#cb4-260" aria-hidden="true" tabindex="-1"></a><span class="vs">    height: 6px;</span></span>
-<span id="cb4-261"><a href="#cb4-261" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #e2e8f0;</span></span>
-<span id="cb4-262"><a href="#cb4-262" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 3px;</span></span>
-<span id="cb4-263"><a href="#cb4-263" aria-hidden="true" tabindex="-1"></a><span class="vs">    overflow: hidden;</span></span>
-<span id="cb4-264"><a href="#cb4-264" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin-top: 0.6rem;</span></span>
-<span id="cb4-265"><a href="#cb4-265" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-266"><a href="#cb4-266" aria-hidden="true" tabindex="-1"></a><span class="vs">  .progress-bar-fill {</span></span>
-<span id="cb4-267"><a href="#cb4-267" aria-hidden="true" tabindex="-1"></a><span class="vs">    height: 100%;</span></span>
-<span id="cb4-268"><a href="#cb4-268" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 3px;</span></span>
-<span id="cb4-269"><a href="#cb4-269" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
-<span id="cb4-270"><a href="#cb4-270" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/style&gt;</span></span>
-<span id="cb4-271"><a href="#cb4-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-272"><a href="#cb4-272" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;div class="flag-app"&gt;</span></span>
-<span id="cb4-273"><a href="#cb4-273" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="main-flag-card"&gt;</span></span>
-<span id="cb4-274"><a href="#cb4-274" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem;"&gt;</span></span>
-<span id="cb4-275"><a href="#cb4-275" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;h3 style="margin: 0; font-size: 1.35rem; color: #0f172a;"&gt;</span><span class="sc">${</span>selected_country<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">&lt;/h3&gt;</span></span>
-<span id="cb4-276"><a href="#cb4-276" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;span style="font-size: 0.85rem; color: #64748b;"&gt;</span><span class="sc">${</span>selected_country<span class="op">.</span><span class="at">continent</span><span class="sc">}</span><span class="vs"> &amp;bull; &lt;code&gt;</span><span class="sc">${</span>selected_country<span class="op">.</span><span class="at">code</span><span class="op">.</span><span class="fu">toUpperCase</span>()<span class="sc">}</span><span class="vs">&lt;/code&gt;&lt;/span&gt;</span></span>
-<span id="cb4-277"><a href="#cb4-277" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
-<span id="cb4-278"><a href="#cb4-278" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;img class="main-img" src="data/</span><span class="sc">${</span>selected_country<span class="op">.</span><span class="at">code</span><span class="sc">}</span><span class="vs">.png" alt="Flag of </span><span class="sc">${</span>selected_country<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">" /&gt;</span></span>
-<span id="cb4-279"><a href="#cb4-279" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
-<span id="cb4-280"><a href="#cb4-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-281"><a href="#cb4-281" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="similar-heading"&gt;</span></span>
-<span id="cb4-282"><a href="#cb4-282" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span&gt;Flags with Closest Similarity&lt;/span&gt;</span></span>
-<span id="cb4-283"><a href="#cb4-283" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
-<span id="cb4-284"><a href="#cb4-284" aria-hidden="true" tabindex="-1"></a><span class="vs">  </span></span>
-<span id="cb4-285"><a href="#cb4-285" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="similar-grid"&gt;</span></span>
-<span id="cb4-286"><a href="#cb4-286" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>top_similar<span class="op">.</span><span class="fu">map</span>(item <span class="kw">=&gt;</span> {</span>
-<span id="cb4-287"><a href="#cb4-287" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> pct <span class="op">=</span> item<span class="op">.</span><span class="at">similarity_pct</span><span class="op">;</span></span>
-<span id="cb4-288"><a href="#cb4-288" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> badgeClass <span class="op">=</span> pct <span class="op">&gt;=</span> <span class="dv">90</span> <span class="op">?</span> <span class="st">'pct-high'</span> <span class="op">:</span> (pct <span class="op">&gt;=</span> <span class="dv">75</span> <span class="op">?</span> <span class="st">'pct-mid'</span> <span class="op">:</span> <span class="st">'pct-low'</span>)<span class="op">;</span></span>
-<span id="cb4-289"><a href="#cb4-289" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> barColor <span class="op">=</span> pct <span class="op">&gt;=</span> <span class="dv">90</span> <span class="op">?</span> <span class="st">'#16a34a'</span> <span class="op">:</span> (pct <span class="op">&gt;=</span> <span class="dv">75</span> <span class="op">?</span> <span class="st">'#0284c7'</span> <span class="op">:</span> <span class="st">'#d97706'</span>)<span class="op">;</span></span>
-<span id="cb4-290"><a href="#cb4-290" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="vs">`</span></span>
-<span id="cb4-291"><a href="#cb4-291" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="similar-card"&gt;</span></span>
-<span id="cb4-292"><a href="#cb4-292" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div&gt;</span></span>
-<span id="cb4-293"><a href="#cb4-293" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;div class="badge-row"&gt;</span></span>
-<span id="cb4-294"><a href="#cb4-294" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;span class="rank-badge"&gt;Match #</span><span class="sc">${</span>item<span class="op">.</span><span class="at">rank</span><span class="sc">}</span><span class="vs">&lt;/span&gt;</span></span>
-<span id="cb4-295"><a href="#cb4-295" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;span class="pct-badge </span><span class="sc">${</span>badgeClass<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>pct<span class="sc">}</span><span class="vs">% Match&lt;/span&gt;</span></span>
-<span id="cb4-296"><a href="#cb4-296" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/div&gt;</span></span>
-<span id="cb4-297"><a href="#cb4-297" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;img class="similar-img" src="data/</span><span class="sc">${</span>item<span class="op">.</span><span class="at">similar_code</span><span class="sc">}</span><span class="vs">.png" alt="Flag of </span><span class="sc">${</span>item<span class="op">.</span><span class="at">similar_name</span><span class="sc">}</span><span class="vs">" /&gt;</span></span>
-<span id="cb4-298"><a href="#cb4-298" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;div style="font-weight: 600; font-size: 0.95rem; color: #0f172a;"&gt;</span><span class="sc">${</span>item<span class="op">.</span><span class="at">similar_name</span><span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb4-299"><a href="#cb4-299" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/div&gt;</span></span>
-<span id="cb4-300"><a href="#cb4-300" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div&gt;</span></span>
-<span id="cb4-301"><a href="#cb4-301" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;div class="progress-bar-bg"&gt;</span></span>
-<span id="cb4-302"><a href="#cb4-302" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;div class="progress-bar-fill" style="width: </span><span class="sc">${</span>pct<span class="sc">}</span><span class="vs">%; background: </span><span class="sc">${</span>barColor<span class="sc">}</span><span class="vs">;"&gt;&lt;/div&gt;</span></span>
-<span id="cb4-303"><a href="#cb4-303" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/div&gt;</span></span>
-<span id="cb4-304"><a href="#cb4-304" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/div&gt;</span></span>
-<span id="cb4-305"><a href="#cb4-305" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;</span></span>
-<span id="cb4-306"><a href="#cb4-306" aria-hidden="true" tabindex="-1"></a><span class="vs">      `</span><span class="op">;</span></span>
-<span id="cb4-307"><a href="#cb4-307" aria-hidden="true" tabindex="-1"></a>    })<span class="op">.</span><span class="fu">join</span>(<span class="st">''</span>)<span class="sc">}</span></span>
-<span id="cb4-308"><a href="#cb4-308" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
-<span id="cb4-309"><a href="#cb4-309" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb4-310"><a href="#cb4-310" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="284" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 283;"><span id="cb4-284"><a href="#cb4-284" aria-hidden="true" tabindex="-1"></a><span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb4-285"><a href="#cb4-285" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;style&gt;</span></span>
+<span id="cb4-286"><a href="#cb4-286" aria-hidden="true" tabindex="-1"></a><span class="vs">  .flag-app {</span></span>
+<span id="cb4-287"><a href="#cb4-287" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;</span></span>
+<span id="cb4-288"><a href="#cb4-288" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin-top: 1.25rem;</span></span>
+<span id="cb4-289"><a href="#cb4-289" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-290"><a href="#cb4-290" aria-hidden="true" tabindex="-1"></a><span class="vs">  .main-flag-card {</span></span>
+<span id="cb4-291"><a href="#cb4-291" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #f8fafc;</span></span>
+<span id="cb4-292"><a href="#cb4-292" aria-hidden="true" tabindex="-1"></a><span class="vs">    border: 1px solid #e2e8f0;</span></span>
+<span id="cb4-293"><a href="#cb4-293" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 12px;</span></span>
+<span id="cb4-294"><a href="#cb4-294" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 1.5rem;</span></span>
+<span id="cb4-295"><a href="#cb4-295" aria-hidden="true" tabindex="-1"></a><span class="vs">    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);</span></span>
+<span id="cb4-296"><a href="#cb4-296" aria-hidden="true" tabindex="-1"></a><span class="vs">    max-width: 520px;</span></span>
+<span id="cb4-297"><a href="#cb4-297" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin-bottom: 2rem;</span></span>
+<span id="cb4-298"><a href="#cb4-298" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-299"><a href="#cb4-299" aria-hidden="true" tabindex="-1"></a><span class="vs">  .main-img {</span></span>
+<span id="cb4-300"><a href="#cb4-300" aria-hidden="true" tabindex="-1"></a><span class="vs">    width: 100%;</span></span>
+<span id="cb4-301"><a href="#cb4-301" aria-hidden="true" tabindex="-1"></a><span class="vs">    max-height: 270px;</span></span>
+<span id="cb4-302"><a href="#cb4-302" aria-hidden="true" tabindex="-1"></a><span class="vs">    object-fit: contain;</span></span>
+<span id="cb4-303"><a href="#cb4-303" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #ffffff;</span></span>
+<span id="cb4-304"><a href="#cb4-304" aria-hidden="true" tabindex="-1"></a><span class="vs">    border: 1px solid #cbd5e1;</span></span>
+<span id="cb4-305"><a href="#cb4-305" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 8px;</span></span>
+<span id="cb4-306"><a href="#cb4-306" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 4px;</span></span>
+<span id="cb4-307"><a href="#cb4-307" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-308"><a href="#cb4-308" aria-hidden="true" tabindex="-1"></a><span class="vs">  .similar-heading {</span></span>
+<span id="cb4-309"><a href="#cb4-309" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-size: 1.2rem;</span></span>
+<span id="cb4-310"><a href="#cb4-310" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-weight: 700;</span></span>
+<span id="cb4-311"><a href="#cb4-311" aria-hidden="true" tabindex="-1"></a><span class="vs">    color: #0f172a;</span></span>
+<span id="cb4-312"><a href="#cb4-312" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin-bottom: 1rem;</span></span>
+<span id="cb4-313"><a href="#cb4-313" aria-hidden="true" tabindex="-1"></a><span class="vs">    display: flex;</span></span>
+<span id="cb4-314"><a href="#cb4-314" aria-hidden="true" tabindex="-1"></a><span class="vs">    align-items: center;</span></span>
+<span id="cb4-315"><a href="#cb4-315" aria-hidden="true" tabindex="-1"></a><span class="vs">    gap: 0.5rem;</span></span>
+<span id="cb4-316"><a href="#cb4-316" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-317"><a href="#cb4-317" aria-hidden="true" tabindex="-1"></a><span class="vs">  .similar-grid {</span></span>
+<span id="cb4-318"><a href="#cb4-318" aria-hidden="true" tabindex="-1"></a><span class="vs">    display: grid;</span></span>
+<span id="cb4-319"><a href="#cb4-319" aria-hidden="true" tabindex="-1"></a><span class="vs">    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));</span></span>
+<span id="cb4-320"><a href="#cb4-320" aria-hidden="true" tabindex="-1"></a><span class="vs">    gap: 1.25rem;</span></span>
+<span id="cb4-321"><a href="#cb4-321" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-322"><a href="#cb4-322" aria-hidden="true" tabindex="-1"></a><span class="vs">  .similar-card {</span></span>
+<span id="cb4-323"><a href="#cb4-323" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #ffffff;</span></span>
+<span id="cb4-324"><a href="#cb4-324" aria-hidden="true" tabindex="-1"></a><span class="vs">    border: 1px solid #e2e8f0;</span></span>
+<span id="cb4-325"><a href="#cb4-325" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 10px;</span></span>
+<span id="cb4-326"><a href="#cb4-326" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 1rem;</span></span>
+<span id="cb4-327"><a href="#cb4-327" aria-hidden="true" tabindex="-1"></a><span class="vs">    box-shadow: 0 2px 5px rgba(0,0,0,0.04);</span></span>
+<span id="cb4-328"><a href="#cb4-328" aria-hidden="true" tabindex="-1"></a><span class="vs">    display: flex;</span></span>
+<span id="cb4-329"><a href="#cb4-329" aria-hidden="true" tabindex="-1"></a><span class="vs">    flex-direction: column;</span></span>
+<span id="cb4-330"><a href="#cb4-330" aria-hidden="true" tabindex="-1"></a><span class="vs">    justify-content: space-between;</span></span>
+<span id="cb4-331"><a href="#cb4-331" aria-hidden="true" tabindex="-1"></a><span class="vs">    transition: transform 0.18s ease, box-shadow 0.18s ease;</span></span>
+<span id="cb4-332"><a href="#cb4-332" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-333"><a href="#cb4-333" aria-hidden="true" tabindex="-1"></a><span class="vs">  .similar-card:hover {</span></span>
+<span id="cb4-334"><a href="#cb4-334" aria-hidden="true" tabindex="-1"></a><span class="vs">    box-shadow: 0 8px 18px rgba(0,0,0,0.09);</span></span>
+<span id="cb4-335"><a href="#cb4-335" aria-hidden="true" tabindex="-1"></a><span class="vs">    transform: translateY(-3px);</span></span>
+<span id="cb4-336"><a href="#cb4-336" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-337"><a href="#cb4-337" aria-hidden="true" tabindex="-1"></a><span class="vs">  .similar-img {</span></span>
+<span id="cb4-338"><a href="#cb4-338" aria-hidden="true" tabindex="-1"></a><span class="vs">    width: 100%;</span></span>
+<span id="cb4-339"><a href="#cb4-339" aria-hidden="true" tabindex="-1"></a><span class="vs">    height: 110px;</span></span>
+<span id="cb4-340"><a href="#cb4-340" aria-hidden="true" tabindex="-1"></a><span class="vs">    object-fit: contain;</span></span>
+<span id="cb4-341"><a href="#cb4-341" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #f8fafc;</span></span>
+<span id="cb4-342"><a href="#cb4-342" aria-hidden="true" tabindex="-1"></a><span class="vs">    border: 1px solid #e2e8f0;</span></span>
+<span id="cb4-343"><a href="#cb4-343" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 6px;</span></span>
+<span id="cb4-344"><a href="#cb4-344" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 3px;</span></span>
+<span id="cb4-345"><a href="#cb4-345" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin-bottom: 0.75rem;</span></span>
+<span id="cb4-346"><a href="#cb4-346" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-347"><a href="#cb4-347" aria-hidden="true" tabindex="-1"></a><span class="vs">  .badge-row {</span></span>
+<span id="cb4-348"><a href="#cb4-348" aria-hidden="true" tabindex="-1"></a><span class="vs">    display: flex;</span></span>
+<span id="cb4-349"><a href="#cb4-349" aria-hidden="true" tabindex="-1"></a><span class="vs">    justify-content: space-between;</span></span>
+<span id="cb4-350"><a href="#cb4-350" aria-hidden="true" tabindex="-1"></a><span class="vs">    align-items: center;</span></span>
+<span id="cb4-351"><a href="#cb4-351" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin-bottom: 0.5rem;</span></span>
+<span id="cb4-352"><a href="#cb4-352" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-353"><a href="#cb4-353" aria-hidden="true" tabindex="-1"></a><span class="vs">  .rank-badge {</span></span>
+<span id="cb4-354"><a href="#cb4-354" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-size: 0.75rem;</span></span>
+<span id="cb4-355"><a href="#cb4-355" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-weight: 600;</span></span>
+<span id="cb4-356"><a href="#cb4-356" aria-hidden="true" tabindex="-1"></a><span class="vs">    color: #475569;</span></span>
+<span id="cb4-357"><a href="#cb4-357" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #f1f5f9;</span></span>
+<span id="cb4-358"><a href="#cb4-358" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 2px 7px;</span></span>
+<span id="cb4-359"><a href="#cb4-359" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 6px;</span></span>
+<span id="cb4-360"><a href="#cb4-360" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-361"><a href="#cb4-361" aria-hidden="true" tabindex="-1"></a><span class="vs">  .pct-badge {</span></span>
+<span id="cb4-362"><a href="#cb4-362" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-size: 0.8rem;</span></span>
+<span id="cb4-363"><a href="#cb4-363" aria-hidden="true" tabindex="-1"></a><span class="vs">    font-weight: 700;</span></span>
+<span id="cb4-364"><a href="#cb4-364" aria-hidden="true" tabindex="-1"></a><span class="vs">    padding: 2px 8px;</span></span>
+<span id="cb4-365"><a href="#cb4-365" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 9999px;</span></span>
+<span id="cb4-366"><a href="#cb4-366" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-367"><a href="#cb4-367" aria-hidden="true" tabindex="-1"></a><span class="vs">  .pct-high { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }</span></span>
+<span id="cb4-368"><a href="#cb4-368" aria-hidden="true" tabindex="-1"></a><span class="vs">  .pct-mid  { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }</span></span>
+<span id="cb4-369"><a href="#cb4-369" aria-hidden="true" tabindex="-1"></a><span class="vs">  .pct-low  { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }</span></span>
+<span id="cb4-370"><a href="#cb4-370" aria-hidden="true" tabindex="-1"></a><span class="vs">  .progress-bar-bg {</span></span>
+<span id="cb4-371"><a href="#cb4-371" aria-hidden="true" tabindex="-1"></a><span class="vs">    width: 100%;</span></span>
+<span id="cb4-372"><a href="#cb4-372" aria-hidden="true" tabindex="-1"></a><span class="vs">    height: 6px;</span></span>
+<span id="cb4-373"><a href="#cb4-373" aria-hidden="true" tabindex="-1"></a><span class="vs">    background: #e2e8f0;</span></span>
+<span id="cb4-374"><a href="#cb4-374" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 3px;</span></span>
+<span id="cb4-375"><a href="#cb4-375" aria-hidden="true" tabindex="-1"></a><span class="vs">    overflow: hidden;</span></span>
+<span id="cb4-376"><a href="#cb4-376" aria-hidden="true" tabindex="-1"></a><span class="vs">    margin-top: 0.6rem;</span></span>
+<span id="cb4-377"><a href="#cb4-377" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-378"><a href="#cb4-378" aria-hidden="true" tabindex="-1"></a><span class="vs">  .progress-bar-fill {</span></span>
+<span id="cb4-379"><a href="#cb4-379" aria-hidden="true" tabindex="-1"></a><span class="vs">    height: 100%;</span></span>
+<span id="cb4-380"><a href="#cb4-380" aria-hidden="true" tabindex="-1"></a><span class="vs">    border-radius: 3px;</span></span>
+<span id="cb4-381"><a href="#cb4-381" aria-hidden="true" tabindex="-1"></a><span class="vs">  }</span></span>
+<span id="cb4-382"><a href="#cb4-382" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/style&gt;</span></span>
+<span id="cb4-383"><a href="#cb4-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-384"><a href="#cb4-384" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;div class="flag-app"&gt;</span></span>
+<span id="cb4-385"><a href="#cb4-385" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="main-flag-card"&gt;</span></span>
+<span id="cb4-386"><a href="#cb4-386" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem;"&gt;</span></span>
+<span id="cb4-387"><a href="#cb4-387" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;h3 style="margin: 0; font-size: 1.35rem; color: #0f172a;"&gt;</span><span class="sc">${</span>selected_country<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">&lt;/h3&gt;</span></span>
+<span id="cb4-388"><a href="#cb4-388" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;span style="font-size: 0.85rem; color: #64748b;"&gt;</span><span class="sc">${</span>selected_country<span class="op">.</span><span class="at">continent</span><span class="sc">}</span><span class="vs"> &amp;bull; &lt;code&gt;</span><span class="sc">${</span>selected_country<span class="op">.</span><span class="at">code</span><span class="op">.</span><span class="fu">toUpperCase</span>()<span class="sc">}</span><span class="vs">&lt;/code&gt;&lt;/span&gt;</span></span>
+<span id="cb4-389"><a href="#cb4-389" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb4-390"><a href="#cb4-390" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;img class="main-img" src="data/</span><span class="sc">${</span>selected_country<span class="op">.</span><span class="at">code</span><span class="sc">}</span><span class="vs">.png" alt="Flag of </span><span class="sc">${</span>selected_country<span class="op">.</span><span class="at">name</span><span class="sc">}</span><span class="vs">" /&gt;</span></span>
+<span id="cb4-391"><a href="#cb4-391" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb4-392"><a href="#cb4-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-393"><a href="#cb4-393" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="similar-heading"&gt;</span></span>
+<span id="cb4-394"><a href="#cb4-394" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;span&gt;Flags with Closest Similarity&lt;/span&gt;</span></span>
+<span id="cb4-395"><a href="#cb4-395" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb4-396"><a href="#cb4-396" aria-hidden="true" tabindex="-1"></a><span class="vs">  </span></span>
+<span id="cb4-397"><a href="#cb4-397" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div class="similar-grid"&gt;</span></span>
+<span id="cb4-398"><a href="#cb4-398" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>top_similar<span class="op">.</span><span class="fu">map</span>(item <span class="kw">=&gt;</span> {</span>
+<span id="cb4-399"><a href="#cb4-399" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> pct <span class="op">=</span> item<span class="op">.</span><span class="at">similarity_pct</span><span class="op">;</span></span>
+<span id="cb4-400"><a href="#cb4-400" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> badgeClass <span class="op">=</span> pct <span class="op">&gt;=</span> <span class="dv">90</span> <span class="op">?</span> <span class="st">'pct-high'</span> <span class="op">:</span> (pct <span class="op">&gt;=</span> <span class="dv">75</span> <span class="op">?</span> <span class="st">'pct-mid'</span> <span class="op">:</span> <span class="st">'pct-low'</span>)<span class="op">;</span></span>
+<span id="cb4-401"><a href="#cb4-401" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> barColor <span class="op">=</span> pct <span class="op">&gt;=</span> <span class="dv">90</span> <span class="op">?</span> <span class="st">'#16a34a'</span> <span class="op">:</span> (pct <span class="op">&gt;=</span> <span class="dv">75</span> <span class="op">?</span> <span class="st">'#0284c7'</span> <span class="op">:</span> <span class="st">'#d97706'</span>)<span class="op">;</span></span>
+<span id="cb4-402"><a href="#cb4-402" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="vs">`</span></span>
+<span id="cb4-403"><a href="#cb4-403" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="similar-card"&gt;</span></span>
+<span id="cb4-404"><a href="#cb4-404" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div&gt;</span></span>
+<span id="cb4-405"><a href="#cb4-405" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;div class="badge-row"&gt;</span></span>
+<span id="cb4-406"><a href="#cb4-406" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;span class="rank-badge"&gt;Match #</span><span class="sc">${</span>item<span class="op">.</span><span class="at">rank</span><span class="sc">}</span><span class="vs">&lt;/span&gt;</span></span>
+<span id="cb4-407"><a href="#cb4-407" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;span class="pct-badge </span><span class="sc">${</span>badgeClass<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>pct<span class="sc">}</span><span class="vs">% Match&lt;/span&gt;</span></span>
+<span id="cb4-408"><a href="#cb4-408" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/div&gt;</span></span>
+<span id="cb4-409"><a href="#cb4-409" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;img class="similar-img" src="data/</span><span class="sc">${</span>item<span class="op">.</span><span class="at">similar_code</span><span class="sc">}</span><span class="vs">.png" alt="Flag of </span><span class="sc">${</span>item<span class="op">.</span><span class="at">similar_name</span><span class="sc">}</span><span class="vs">" /&gt;</span></span>
+<span id="cb4-410"><a href="#cb4-410" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;div style="font-weight: 600; font-size: 0.95rem; color: #0f172a;"&gt;</span><span class="sc">${</span>item<span class="op">.</span><span class="at">similar_name</span><span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb4-411"><a href="#cb4-411" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/div&gt;</span></span>
+<span id="cb4-412"><a href="#cb4-412" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div&gt;</span></span>
+<span id="cb4-413"><a href="#cb4-413" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;div class="progress-bar-bg"&gt;</span></span>
+<span id="cb4-414"><a href="#cb4-414" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;div class="progress-bar-fill" style="width: </span><span class="sc">${</span>pct<span class="sc">}</span><span class="vs">%; background: </span><span class="sc">${</span>barColor<span class="sc">}</span><span class="vs">;"&gt;&lt;/div&gt;</span></span>
+<span id="cb4-415"><a href="#cb4-415" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/div&gt;</span></span>
+<span id="cb4-416"><a href="#cb4-416" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/div&gt;</span></span>
+<span id="cb4-417"><a href="#cb4-417" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;</span></span>
+<span id="cb4-418"><a href="#cb4-418" aria-hidden="true" tabindex="-1"></a><span class="vs">      `</span><span class="op">;</span></span>
+<span id="cb4-419"><a href="#cb4-419" aria-hidden="true" tabindex="-1"></a>    })<span class="op">.</span><span class="fu">join</span>(<span class="st">''</span>)<span class="sc">}</span></span>
+<span id="cb4-420"><a href="#cb4-420" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;</span></span>
+<span id="cb4-421"><a href="#cb4-421" aria-hidden="true" tabindex="-1"></a><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb4-422"><a href="#cb4-422" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-4" data-nodetype="expression">
 
@@ -421,36 +533,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><strong>Chad &amp; Romania</strong></td>
-<td style="text-align: center;"><img src="data/td.png" class="img-fluid" width="80"> <strong>Chad</strong></td>
-<td style="text-align: center;"><img src="data/ro.png" class="img-fluid" width="80"> <strong>Romania</strong></td>
+<td style="text-align: center;"><img src="data/td.png" class="img-fluid" width="75"> <br><strong>Chad</strong></td>
+<td style="text-align: center;"><img src="data/ro.png" class="img-fluid" width="75"> <br><strong>Romania</strong></td>
 <td style="text-align: center;"><span class="pct-badge pct-high">100%</span></td>
 <td style="text-align: left;">Virtually identical blue-yellow-red vertical tricolor (Chad’s blue is an imperceptibly darker indigo).</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Monaco &amp; Indonesia</strong></td>
-<td style="text-align: center;"><img src="data/mc.png" class="img-fluid" width="80"> <strong>Monaco</strong></td>
-<td style="text-align: center;"><img src="data/id.png" class="img-fluid" width="80"> <strong>Indonesia</strong></td>
+<td style="text-align: center;"><img src="data/mc.png" class="img-fluid" width="75"> <br><strong>Monaco</strong></td>
+<td style="text-align: center;"><img src="data/id.png" class="img-fluid" width="75"> <br><strong>Indonesia</strong></td>
 <td style="text-align: center;"><span class="pct-badge pct-high">98%</span></td>
 <td style="text-align: left;">Identical red-over-white horizontal stripes; differing only in aspect ratio (Monaco is 4:5, Indonesia is 2:3).</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>Norway &amp; Svalbard</strong></td>
-<td style="text-align: center;"><img src="data/no.png" class="img-fluid" width="80"> <strong>Norway</strong></td>
-<td style="text-align: center;"><img src="data/sj.png" class="img-fluid" width="80"> <strong>Svalbard</strong></td>
+<td style="text-align: center;"><img src="data/no.png" class="img-fluid" width="75"> <br><strong>Norway</strong></td>
+<td style="text-align: center;"><img src="data/sj.png" class="img-fluid" width="75"> <br><strong>Svalbard</strong></td>
 <td style="text-align: center;"><span class="pct-badge pct-high">100%</span></td>
-<td style="text-align: left;">Official flag is identical.</td>
+<td style="text-align: left;">Official flag design is identical.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>United States &amp; Outlying Is.</strong></td>
-<td style="text-align: center;"><img src="data/us.png" class="img-fluid" width="80"> <strong>United States</strong></td>
-<td style="text-align: center;"><img src="data/um.png" class="img-fluid" width="80"> <strong>U.S. Outlying Is.</strong></td>
+<td style="text-align: center;"><img src="data/us.png" class="img-fluid" width="75"> <br><strong>United States</strong></td>
+<td style="text-align: center;"><img src="data/um.png" class="img-fluid" width="75"> <br><strong>U.S. Outlying Is.</strong></td>
 <td style="text-align: center;"><span class="pct-badge pct-high">100%</span></td>
 <td style="text-align: left;">Identical 50-star design.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>France &amp; Saint Martin</strong></td>
-<td style="text-align: center;"><img src="data/fr.png" class="img-fluid" width="80"> <strong>France</strong></td>
-<td style="text-align: center;"><img src="data/mf.png" class="img-fluid" width="80"> <strong>Saint Martin</strong></td>
+<td style="text-align: center;"><img src="data/fr.png" class="img-fluid" width="75"> <br><strong>France</strong></td>
+<td style="text-align: center;"><img src="data/mf.png" class="img-fluid" width="75"> <br><strong>Saint Martin</strong></td>
 <td style="text-align: center;"><span class="pct-badge pct-high">100%</span></td>
 <td style="text-align: left;">Uses the official French national flag.</td>
 </tr>
@@ -462,45 +574,107 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="famous-flag-families-high-similarity-pairs">🎨 Famous Flag Families &amp; High-Similarity Pairs</h3>
 <div class="grid">
 <div class="g-col-12 g-col-md-6">
-<section id="ireland-vs.-côte-divoire" class="level4 card p-3 h-100 shadow-sm">
-<h4 class="anchored" data-anchor-id="ireland-vs.-côte-divoire">🇮🇪 Ireland vs.&nbsp;🇨🇮 Côte d’Ivoire</h4>
-<ul>
-<li><strong>Ireland:</strong> Green, White, Orange <img src="data/ie.png" class="img-fluid" width="70"></li>
-<li><strong>Côte d’Ivoire:</strong> Orange, White, Green <img src="data/ci.png" class="img-fluid" width="70"></li>
-<li><em>Mirror opposites of each other.</em></li>
-</ul>
-</section>
+<div class="family-card">
+<div class="family-title">
+🇮🇪 Ireland vs.&nbsp;🇨🇮 Côte d’Ivoire
+</div>
+<div class="family-desc">
+Mirror opposites across the vertical tricolor axis.
+</div>
+<div class="flag-pair-container">
+<pre><code>&lt;div class="mini-flag-item"&gt;
+  &lt;img src="data/ie.png" alt="Ireland flag" class="bottom-flag-img" /&gt;
+  &lt;span class="mini-flag-label"&gt;Ireland&lt;/span&gt;
+  &lt;span class="mini-flag-sub"&gt;Green • White • Orange&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mini-flag-item"&gt;
+  &lt;img src="data/ci.png" alt="Côte d'Ivoire flag" class="bottom-flag-img" /&gt;
+  &lt;span class="mini-flag-label"&gt;Côte d'Ivoire&lt;/span&gt;
+  &lt;span class="mini-flag-sub"&gt;Orange • White • Green&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+</div>
+</div>
 </div>
 <div class="g-col-12 g-col-md-6">
-<section id="netherlands-vs.-luxembourg" class="level4 card p-3 h-100 shadow-sm">
-<h4 class="anchored" data-anchor-id="netherlands-vs.-luxembourg">🇳🇱 Netherlands vs.&nbsp;🇱🇺 Luxembourg</h4>
-<ul>
-<li><strong>Netherlands:</strong> Red, White, Cobalt Blue <img src="data/nl.png" class="img-fluid" width="70"></li>
-<li><strong>Luxembourg:</strong> Red, White, Sky Blue <img src="data/lu.png" class="img-fluid" width="70"></li>
-<li><em>Luxembourg uses a brighter sky-blue stripe and 1:2 aspect ratio.</em></li>
-</ul>
-</section>
+<div class="family-card">
+<div class="family-title">
+🇳🇱 Netherlands vs.&nbsp;🇱🇺 Luxembourg
+</div>
+<div class="family-desc">
+Different shades of blue and ratio dimensions.
+</div>
+<div class="flag-pair-container">
+<pre><code>&lt;div class="mini-flag-item"&gt;
+  &lt;img src="data/nl.png" alt="Netherlands flag" class="bottom-flag-img" /&gt;
+  &lt;span class="mini-flag-label"&gt;Netherlands&lt;/span&gt;
+  &lt;span class="mini-flag-sub"&gt;Cobalt Blue (2:3)&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mini-flag-item"&gt;
+  &lt;img src="data/lu.png" alt="Luxembourg flag" class="bottom-flag-img" /&gt;
+  &lt;span class="mini-flag-label"&gt;Luxembourg&lt;/span&gt;
+  &lt;span class="mini-flag-sub"&gt;Sky Blue (1:2)&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+</div>
+</div>
 </div>
 <div class="g-col-12 g-col-md-6">
-<section id="pan-arab-colors" class="level4 card p-3 h-100 shadow-sm">
-<h4 class="anchored" data-anchor-id="pan-arab-colors">🇪🇬 Pan-Arab Colors</h4>
-<ul>
-<li><strong>Egypt:</strong> Red, White, Black + Eagle <img src="data/eg.png" class="img-fluid" width="70"></li>
-<li><strong>Yemen:</strong> Red, White, Black <img src="data/ye.png" class="img-fluid" width="70"></li>
-<li><strong>Syria:</strong> Red, White, Black + Stars <img src="data/sy.png" class="img-fluid" width="70"></li>
-<li><strong>Iraq:</strong> Red, White, Black + Takbir <img src="data/iq.png" class="img-fluid" width="70"></li>
-</ul>
-</section>
+<div class="family-card">
+<div class="family-title">
+🇪🇬 Pan-Arab Colors
+</div>
+<div class="family-desc">
+Sharing the iconic red-white-black tricolor base.
+</div>
+<div class="flag-pair-container">
+<pre><code>&lt;div class="mini-flag-item"&gt;
+  &lt;img src="data/eg.png" alt="Egypt flag" class="bottom-flag-img" /&gt;
+  &lt;span class="mini-flag-label"&gt;Egypt&lt;/span&gt;
+  &lt;span class="mini-flag-sub"&gt;Golden Eagle&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mini-flag-item"&gt;
+  &lt;img src="data/ye.png" alt="Yemen flag" class="bottom-flag-img" /&gt;
+  &lt;span class="mini-flag-label"&gt;Yemen&lt;/span&gt;
+  &lt;span class="mini-flag-sub"&gt;Plain Tricolor&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mini-flag-item"&gt;
+  &lt;img src="data/sy.png" alt="Syria flag" class="bottom-flag-img" /&gt;
+  &lt;span class="mini-flag-label"&gt;Syria&lt;/span&gt;
+  &lt;span class="mini-flag-sub"&gt;Two Green Stars&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mini-flag-item"&gt;
+  &lt;img src="data/iq.png" alt="Iraq flag" class="bottom-flag-img" /&gt;
+  &lt;span class="mini-flag-label"&gt;Iraq&lt;/span&gt;
+  &lt;span class="mini-flag-sub"&gt;Takbir Script&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+</div>
+</div>
 </div>
 <div class="g-col-12 g-col-md-6">
-<section id="gran-colombia-family" class="level4 card p-3 h-100 shadow-sm">
-<h4 class="anchored" data-anchor-id="gran-colombia-family">🇨🇴 Gran Colombia Family</h4>
-<ul>
-<li><strong>Colombia:</strong> Yellow, Blue, Red <img src="data/co.png" class="img-fluid" width="70"></li>
-<li><strong>Ecuador:</strong> Yellow, Blue, Red + Coat of Arms <img src="data/ec.png" class="img-fluid" width="70"></li>
-<li><strong>Venezuela:</strong> Yellow, Blue, Red + Arc of Stars <img src="data/ve.png" class="img-fluid" width="70"></li>
-</ul>
-</section>
+<div class="family-card">
+<div class="family-title">
+🇨🇴 Gran Colombia Family
+</div>
+<div class="family-desc">
+Sharing the yellow-blue-red stripes from Miranda’s design.
+</div>
+<div class="flag-pair-container">
+<pre><code>&lt;div class="mini-flag-item"&gt;
+  &lt;img src="data/co.png" alt="Colombia flag" class="bottom-flag-img" /&gt;
+  &lt;span class="mini-flag-label"&gt;Colombia&lt;/span&gt;
+  &lt;span class="mini-flag-sub"&gt;Plain Tricolor&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mini-flag-item"&gt;
+  &lt;img src="data/ec.png" alt="Ecuador flag" class="bottom-flag-img" /&gt;
+  &lt;span class="mini-flag-label"&gt;Ecuador&lt;/span&gt;
+  &lt;span class="mini-flag-sub"&gt;Coat of Arms&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class="mini-flag-item"&gt;
+  &lt;img src="data/ve.png" alt="Venezuela flag" class="bottom-flag-img" /&gt;
+  &lt;span class="mini-flag-label"&gt;Venezuela&lt;/span&gt;
+  &lt;span class="mini-flag-sub"&gt;Arc of 8 Stars&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+</div>
+</div>
 </div>
 </div>
 </section>
