@@ -5,9 +5,9 @@ format:
   html:
     theme: cosmo
     toc: true
+    toc-title: "Page Contents"
     toc-depth: 2
     page-layout: full
-    css: []
 execute:
   echo: false
 ---
@@ -84,6 +84,47 @@ ojs_define(
     background: transparent;
   }
   
+  /* Polished Table of Contents */
+  #TOC, .quarto-sidebar, nav#TOC {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(8px) !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 1.2rem !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05) !important;
+  }
+  #toc-title {
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    margin-bottom: 0.75rem !important;
+    border-bottom: 2px solid #0284c7 !important;
+    padding-bottom: 0.4rem !important;
+  }
+  nav#TOC ul {
+    list-style: none !important;
+    padding-left: 0.25rem !important;
+  }
+  nav#TOC li {
+    margin: 0.45rem 0 !important;
+  }
+  nav#TOC a {
+    color: #475569 !important;
+    text-decoration: none !important;
+    font-size: 0.88rem !important;
+    font-weight: 500 !important;
+    transition: all 0.15s ease !important;
+    border-left: 2px solid transparent !important;
+    padding-left: 0.5rem !important;
+  }
+  nav#TOC a:hover, nav#TOC a.active {
+    color: #0284c7 !important;
+    border-left-color: #0284c7 !important;
+    font-weight: 600 !important;
+  }
+
   .hero-banner {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0369a1 100%);
     color: #ffffff;
@@ -110,9 +151,9 @@ ojs_define(
   }
 
   .content-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    border: 1px solid rgba(226, 232, 240, 0.9);
     border-radius: 14px;
     padding: 1.75rem;
     box-shadow: 0 4px 15px -2px rgba(0, 0, 0, 0.05);
@@ -125,6 +166,77 @@ ojs_define(
     overflow: hidden;
     border: 1px solid #e2e8f0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    margin-bottom: 1.5rem;
+  }
+  .table-card table {
+    margin-bottom: 0 !important;
+  }
+  .table-card td {
+    vertical-align: middle !important;
+  }
+
+  /* Non-overlapping Bottom Family Cards */
+  .family-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .family-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.4rem 0;
+  }
+  .family-desc {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0 0 1rem 0;
+  }
+  .flag-pair-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  .mini-flag-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.6rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 1 1 calc(50% - 0.75rem);
+    min-width: 105px;
+    text-align: center;
+  }
+  .bottom-flag-img {
+    width: 100%;
+    max-width: 110px;
+    height: 60px;
+    object-fit: contain;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 2px;
+  }
+  .mini-flag-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.2;
+  }
+  .mini-flag-sub {
+    font-size: 0.72rem;
+    color: #64748b;
   }
 </style>
 
@@ -325,11 +437,11 @@ html`
 
 | Pair | Flag A | Flag B | Similarity | Visual Difference |
 |:---|:---:|:---:|:---:|:---|
-| **Chad & Romania** | ![](data/td.png){width=80} **Chad** | ![](data/ro.png){width=80} **Romania** | <span class="pct-badge pct-high">100%</span> | Virtually identical blue-yellow-red vertical tricolor (Chad's blue is an imperceptibly darker indigo). |
-| **Monaco & Indonesia** | ![](data/mc.png){width=80} **Monaco** | ![](data/id.png){width=80} **Indonesia** | <span class="pct-badge pct-high">98%</span> | Identical red-over-white horizontal stripes; differing only in aspect ratio (Monaco is 4:5, Indonesia is 2:3). |
-| **Norway & Svalbard** | ![](data/no.png){width=80} **Norway** | ![](data/sj.png){width=80} **Svalbard** | <span class="pct-badge pct-high">100%</span> | Official flag is identical. |
-| **United States & Outlying Is.** | ![](data/us.png){width=80} **United States** | ![](data/um.png){width=80} **U.S. Outlying Is.** | <span class="pct-badge pct-high">100%</span> | Identical 50-star design. |
-| **France & Saint Martin** | ![](data/fr.png){width=80} **France** | ![](data/mf.png){width=80} **Saint Martin** | <span class="pct-badge pct-high">100%</span> | Uses the official French national flag. |
+| **Chad & Romania** | ![](data/td.png){width=75} <br>**Chad** | ![](data/ro.png){width=75} <br>**Romania** | <span class="pct-badge pct-high">100%</span> | Virtually identical blue-yellow-red vertical tricolor (Chad's blue is an imperceptibly darker indigo). |
+| **Monaco & Indonesia** | ![](data/mc.png){width=75} <br>**Monaco** | ![](data/id.png){width=75} <br>**Indonesia** | <span class="pct-badge pct-high">98%</span> | Identical red-over-white horizontal stripes; differing only in aspect ratio (Monaco is 4:5, Indonesia is 2:3). |
+| **Norway & Svalbard** | ![](data/no.png){width=75} <br>**Norway** | ![](data/sj.png){width=75} <br>**Svalbard** | <span class="pct-badge pct-high">100%</span> | Official flag design is identical. |
+| **United States & Outlying Is.** | ![](data/us.png){width=75} <br>**United States** | ![](data/um.png){width=75} <br>**U.S. Outlying Is.** | <span class="pct-badge pct-high">100%</span> | Identical 50-star design. |
+| **France & Saint Martin** | ![](data/fr.png){width=75} <br>**France** | ![](data/mf.png){width=75} <br>**Saint Martin** | <span class="pct-badge pct-high">100%</span> | Uses the official French national flag. |
 
 :::
 
@@ -338,40 +450,94 @@ html`
 ::: {.grid}
 
 ::: {.g-col-12 .g-col-md-6}
-::: {.card .p-3 .h-100 .shadow-sm}
-#### 🇮🇪 Ireland vs. 🇨🇮 Côte d'Ivoire
-- **Ireland:** Green, White, Orange ![](data/ie.png){width=70}
-- **Côte d'Ivoire:** Orange, White, Green ![](data/ci.png){width=70}
-- *Mirror opposites of each other.*
-:::
-:::
-
-::: {.g-col-12 .g-col-md-6}
-::: {.card .p-3 .h-100 .shadow-sm}
-#### 🇳🇱 Netherlands vs. 🇱🇺 Luxembourg
-- **Netherlands:** Red, White, Cobalt Blue ![](data/nl.png){width=70}
-- **Luxembourg:** Red, White, Sky Blue ![](data/lu.png){width=70}
-- *Luxembourg uses a brighter sky-blue stripe and 1:2 aspect ratio.*
-:::
-:::
-
-::: {.g-col-12 .g-col-md-6}
-::: {.card .p-3 .h-100 .shadow-sm}
-#### 🇪🇬 Pan-Arab Colors
-- **Egypt:** Red, White, Black + Eagle ![](data/eg.png){width=70}
-- **Yemen:** Red, White, Black ![](data/ye.png){width=70}
-- **Syria:** Red, White, Black + Stars ![](data/sy.png){width=70}
-- **Iraq:** Red, White, Black + Takbir ![](data/iq.png){width=70}
-:::
+<div class="family-card">
+  <div class="family-title">🇮🇪 Ireland vs. 🇨🇮 Côte d'Ivoire</div>
+  <div class="family-desc">Mirror opposites across the vertical tricolor axis.</div>
+  <div class="flag-pair-container">
+    <div class="mini-flag-item">
+      <img src="data/ie.png" alt="Ireland flag" class="bottom-flag-img" />
+      <span class="mini-flag-label">Ireland</span>
+      <span class="mini-flag-sub">Green • White • Orange</span>
+    </div>
+    <div class="mini-flag-item">
+      <img src="data/ci.png" alt="Côte d'Ivoire flag" class="bottom-flag-img" />
+      <span class="mini-flag-label">Côte d'Ivoire</span>
+      <span class="mini-flag-sub">Orange • White • Green</span>
+    </div>
+  </div>
+</div>
 :::
 
 ::: {.g-col-12 .g-col-md-6}
-::: {.card .p-3 .h-100 .shadow-sm}
-#### 🇨🇴 Gran Colombia Family
-- **Colombia:** Yellow, Blue, Red ![](data/co.png){width=70}
-- **Ecuador:** Yellow, Blue, Red + Coat of Arms ![](data/ec.png){width=70}
-- **Venezuela:** Yellow, Blue, Red + Arc of Stars ![](data/ve.png){width=70}
+<div class="family-card">
+  <div class="family-title">🇳🇱 Netherlands vs. 🇱🇺 Luxembourg</div>
+  <div class="family-desc">Different shades of blue and ratio dimensions.</div>
+  <div class="flag-pair-container">
+    <div class="mini-flag-item">
+      <img src="data/nl.png" alt="Netherlands flag" class="bottom-flag-img" />
+      <span class="mini-flag-label">Netherlands</span>
+      <span class="mini-flag-sub">Cobalt Blue (2:3)</span>
+    </div>
+    <div class="mini-flag-item">
+      <img src="data/lu.png" alt="Luxembourg flag" class="bottom-flag-img" />
+      <span class="mini-flag-label">Luxembourg</span>
+      <span class="mini-flag-sub">Sky Blue (1:2)</span>
+    </div>
+  </div>
+</div>
 :::
+
+::: {.g-col-12 .g-col-md-6}
+<div class="family-card">
+  <div class="family-title">🇪🇬 Pan-Arab Colors</div>
+  <div class="family-desc">Sharing the iconic red-white-black tricolor base.</div>
+  <div class="flag-pair-container">
+    <div class="mini-flag-item">
+      <img src="data/eg.png" alt="Egypt flag" class="bottom-flag-img" />
+      <span class="mini-flag-label">Egypt</span>
+      <span class="mini-flag-sub">Golden Eagle</span>
+    </div>
+    <div class="mini-flag-item">
+      <img src="data/ye.png" alt="Yemen flag" class="bottom-flag-img" />
+      <span class="mini-flag-label">Yemen</span>
+      <span class="mini-flag-sub">Plain Tricolor</span>
+    </div>
+    <div class="mini-flag-item">
+      <img src="data/sy.png" alt="Syria flag" class="bottom-flag-img" />
+      <span class="mini-flag-label">Syria</span>
+      <span class="mini-flag-sub">Two Green Stars</span>
+    </div>
+    <div class="mini-flag-item">
+      <img src="data/iq.png" alt="Iraq flag" class="bottom-flag-img" />
+      <span class="mini-flag-label">Iraq</span>
+      <span class="mini-flag-sub">Takbir Script</span>
+    </div>
+  </div>
+</div>
+:::
+
+::: {.g-col-12 .g-col-md-6}
+<div class="family-card">
+  <div class="family-title">🇨🇴 Gran Colombia Family</div>
+  <div class="family-desc">Sharing the yellow-blue-red stripes from Miranda's design.</div>
+  <div class="flag-pair-container">
+    <div class="mini-flag-item">
+      <img src="data/co.png" alt="Colombia flag" class="bottom-flag-img" />
+      <span class="mini-flag-label">Colombia</span>
+      <span class="mini-flag-sub">Plain Tricolor</span>
+    </div>
+    <div class="mini-flag-item">
+      <img src="data/ec.png" alt="Ecuador flag" class="bottom-flag-img" />
+      <span class="mini-flag-label">Ecuador</span>
+      <span class="mini-flag-sub">Coat of Arms</span>
+    </div>
+    <div class="mini-flag-item">
+      <img src="data/ve.png" alt="Venezuela flag" class="bottom-flag-img" />
+      <span class="mini-flag-label">Venezuela</span>
+      <span class="mini-flag-sub">Arc of 8 Stars</span>
+    </div>
+  </div>
+</div>
 :::
 
 :::
