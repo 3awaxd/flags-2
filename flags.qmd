@@ -8,6 +8,8 @@ format:
     toc-title: "Page Contents"
     toc-depth: 2
     page-layout: full
+resources:
+  - data
 execute:
   echo: false
 ---
@@ -400,7 +402,7 @@ html`
       const pct = item.similarity_pct;
       const badgeClass = pct >= 90 ? 'pct-high' : (pct >= 75 ? 'pct-mid' : 'pct-low');
       const barColor = pct >= 90 ? '#16a34a' : (pct >= 75 ? '#0284c7' : '#d97706');
-      return `
+      return html`
         <div class="similar-card">
           <div>
             <div class="badge-row">
@@ -417,7 +419,7 @@ html`
           </div>
         </div>
       `;
-    }).join('')}
+    })}
   </div>
 </div>
 `
