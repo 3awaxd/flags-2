@@ -1,11 +1,13 @@
 ---
-title: "World Flag Explorer"
-subtitle: "Explore national flags and discover flags with similar color palettes and patterns"
+title: "🌍 World Flag Explorer & Similarity Guide"
+subtitle: "Interactive flag matcher and guide to identical and high-similarity national flags"
 format:
   html:
     theme: cosmo
-    toc: false
+    toc: true
+    toc-depth: 2
     page-layout: full
+    css: []
 execute:
   echo: false
 ---
@@ -19,7 +21,7 @@ library(countrycode)
 # Load similarity data
 similar_raw <- read_csv("data/similar_flags.csv", show_col_types = FALSE)
 
-# Build country list with full names
+# Build comprehensive country metadata
 all_codes <- unique(c(similar_raw$code, similar_raw$similar_code))
 
 countries <- tibble(code = all_codes) |>
@@ -37,37 +39,122 @@ countries <- tibble(code = all_codes) |>
       code == "bv" ~ "Bouvet Island",
       code == "sj" ~ "Svalbard & Jan Mayen",
       code == "um" ~ "U.S. Outlying Islands",
+      code == "mf" ~ "Saint Martin",
       is.na(name) ~ toupper(code),
       TRUE ~ name
     ),
-    continent = if_else(is.na(continent), "Other", continent)
+    continent = if_else(is.na(continent), "Territories & Others", continent)
   ) |>
   arrange(name)
 
-# Add country names to similarity pairs
+# Attach names and compute intuitive similarity percentage
 similar_df <- similar_raw |>
   left_join(countries |> select(code, name), by = "code") |>
-  left_join(countries |> select(similar_code = code, similar_name = name), by = "similar_code")
+  left_join(countries |> select(similar_code = code, similar_name = name), by = "similar_code") |>
+  mutate(
+    similarity_pct = case_when(
+      distance == 0 ~ 100,
+      distance < 0.002 ~ 100,
+      TRUE ~ pmax(1, pmin(99, round(100 * exp(-distance * 1.7))))
+    )
+  )
 
-# Export to Observable JS
+# Pass structured datasets to Observable JS
 ojs_define(
   countries_meta = countries,
   similarity_meta = similar_df
 )
 ```
 
+```{=html}
+<style>
+  body {
+    background-color: #f1f5f9;
+    background-image: 
+      radial-gradient(at 90% 10%, rgba(37, 99, 235, 0.07) 0px, transparent 50%),
+      radial-gradient(at 10% 40%, rgba(14, 165, 233, 0.07) 0px, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000' opacity='0.08'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%230284c7' stop-opacity='0.4'/%3E%3Cstop offset='100%25' stop-color='%230284c7' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='500' cy='500' r='420' fill='url(%23g)' stroke='%230369a1' stroke-width='4'/%3E%3Cellipse cx='500' cy='500' rx='420' ry='210' fill='none' stroke='%230369a1' stroke-width='3'/%3E%3Cellipse cx='500' cy='500' rx='210' ry='420' fill='none' stroke='%230369a1' stroke-width='3'/%3E%3Cellipse cx='500' cy='500' rx='360' ry='360' fill='none' stroke='%230369a1' stroke-width='2' stroke-dasharray='8 8'/%3E%3Cline x1='80' y1='500' x2='920' y2='500' stroke='%230369a1' stroke-width='3'/%3E%3Cline x1='500' y1='80' x2='500' y2='920' stroke='%230369a1' stroke-width='3'/%3E%3Cpath d='M250,220 Q380,180 500,220 T750,220' fill='none' stroke='%230369a1' stroke-width='2' stroke-dasharray='5 5'/%3E%3Cpath d='M250,780 Q380,820 500,780 T750,780' fill='none' stroke='%230369a1' stroke-width='2' stroke-dasharray='5 5'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-position: right -60px top 20px;
+    background-repeat: no-repeat;
+    background-size: auto, auto, 800px 800px;
+  }
+  
+  #quarto-content {
+    background: transparent;
+  }
+  
+  .hero-banner {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0369a1 100%);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-banner::after {
+    content: '🌐';
+    font-size: 8rem;
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  .content-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 14px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 15px -2px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+  }
+  
+  .table-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+</style>
+
+<div class="hero-banner">
+  <div>
+    <h1 style="color: #ffffff; margin: 0 0 0.5rem 0; font-size: 2rem; font-weight: 800;">World Flag Explorer</h1>
+    <p style="color: #e2e8f0; margin: 0; font-size: 1.05rem; max-width: 650px;">
+      Explore 250+ national and regional flags across the globe and discover which flags share colors, layouts, and historical designs.
+    </p>
+  </div>
+</div>
+```
+
+## 🔍 Interactive Flag Similarity Finder
+
+Select any country to view its official flag and discover the flags with the closest visual patterns and color palettes.
+
+::: {.content-card}
+
 ```{ojs}
-// Transform input data
+// Transform datasets for OJS
 countries = transpose(countries_meta)
 similarities = transpose(similarity_meta)
 ```
 
 ```{ojs}
-// Searchable / selectable dropdown
 viewof selected_code = Inputs.select(
   countries.map(d => d.code),
   {
-    label: "Choose a Country:",
+    label: "Select Country:",
     format: code => {
       const item = countries.find(d => d.code === code);
       return item ? `${item.name} (${item.continent})` : code;
@@ -79,38 +166,38 @@ viewof selected_code = Inputs.select(
 
 ```{ojs}
 selected_country = countries.find(d => d.code === selected_code)
-top_similar = similarities.filter(d => d.code === selected_code).slice(0, 4)
+top_similar = similarities.filter(d => d.code === selected_code).slice(0, 5)
 ```
 
 ```{ojs}
 html`
 <style>
-  .flag-container {
+  .flag-app {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
   }
-  .main-card {
-    background: #ffffff;
+  .main-flag-card {
+    background: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    max-width: 520px;
     margin-bottom: 2rem;
-    max-width: 600px;
   }
-  .main-flag-img {
+  .main-img {
     width: 100%;
-    max-height: 280px;
+    max-height: 270px;
     object-fit: contain;
-    background: #f8fafc;
+    background: #ffffff;
     border: 1px solid #cbd5e1;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 4px;
   }
-  .similar-section-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #1e293b;
+  .similar-heading {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0f172a;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -118,7 +205,7 @@ html`
   }
   .similar-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     gap: 1.25rem;
   }
   .similar-card {
@@ -126,70 +213,167 @@ html`
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
   }
   .similar-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.09);
+    transform: translateY(-3px);
   }
-  .similar-flag-img {
+  .similar-img {
     width: 100%;
-    height: 120px;
+    height: 110px;
     object-fit: contain;
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 6px;
+    padding: 3px;
     margin-bottom: 0.75rem;
   }
-  .match-badge {
-    display: inline-block;
-    background: #e0f2fe;
-    color: #0369a1;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 9999px;
+  .badge-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 0.5rem;
   }
-  .card-country-name {
+  .rank-badge {
+    font-size: 0.75rem;
     font-weight: 600;
-    font-size: 0.95rem;
-    color: #0f172a;
-    margin: 0;
+    color: #475569;
+    background: #f1f5f9;
+    padding: 2px 7px;
+    border-radius: 6px;
+  }
+  .pct-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 9999px;
+  }
+  .pct-high { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+  .pct-mid  { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+  .pct-low  { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+  .progress-bar-bg {
+    width: 100%;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 0.6rem;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 3px;
   }
 </style>
 
-<div class="flag-container">
-  <div class="main-card">
-    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
-      <h3 style="margin: 0; font-size: 1.5rem; color: #0f172a;">${selected_country.name}</h3>
-      <span style="font-size: 0.875rem; color: #64748b; font-weight: 500;">${selected_country.continent} &bull; <code>${selected_country.code.toUpperCase()}</code></span>
+<div class="flag-app">
+  <div class="main-flag-card">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem;">
+      <h3 style="margin: 0; font-size: 1.35rem; color: #0f172a;">${selected_country.name}</h3>
+      <span style="font-size: 0.85rem; color: #64748b;">${selected_country.continent} &bull; <code>${selected_country.code.toUpperCase()}</code></span>
     </div>
-    <img 
-      class="main-flag-img" 
-      src="data/${selected_country.code}.png" 
-      alt="Flag of ${selected_country.name}" 
-    />
+    <img class="main-img" src="data/${selected_country.code}.png" alt="Flag of ${selected_country.name}" />
   </div>
 
-  <div class="similar-section-title">
-    <span>Flags with Similar Visuals & Colors</span>
+  <div class="similar-heading">
+    <span>Flags with Closest Similarity</span>
   </div>
-
+  
   <div class="similar-grid">
-    ${top_similar.map(item => `
-      <div class="similar-card">
-        <span class="match-badge">Match #${item.rank}</span>
-        <img 
-          class="similar-flag-img" 
-          src="data/${item.similar_code}.png" 
-          alt="Flag of ${item.similar_name}" 
-        />
-        <p class="card-country-name">${item.similar_name}</p>
-      </div>
-    `).join('')}
+    ${top_similar.map(item => {
+      const pct = item.similarity_pct;
+      const badgeClass = pct >= 90 ? 'pct-high' : (pct >= 75 ? 'pct-mid' : 'pct-low');
+      const barColor = pct >= 90 ? '#16a34a' : (pct >= 75 ? '#0284c7' : '#d97706');
+      return `
+        <div class="similar-card">
+          <div>
+            <div class="badge-row">
+              <span class="rank-badge">Match #${item.rank}</span>
+              <span class="pct-badge ${badgeClass}">${pct}% Match</span>
+            </div>
+            <img class="similar-img" src="data/${item.similar_code}.png" alt="Flag of ${item.similar_name}" />
+            <div style="font-weight: 600; font-size: 0.95rem; color: #0f172a;">${item.similar_name}</div>
+          </div>
+          <div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" style="width: ${pct}%; background: ${barColor};"></div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('')}
   </div>
 </div>
 `
 ```
+
+:::
+
+---
+
+## 🏆 Famous 100% Identical & High-Similarity Flag Pairs
+
+::: {.content-card}
+
+### 🌟 100% Identical Flags
+
+::: {.table-card}
+
+| Pair | Flag A | Flag B | Similarity | Visual Difference |
+|:---|:---:|:---:|:---:|:---|
+| **Chad & Romania** | ![](data/td.png){width=80} **Chad** | ![](data/ro.png){width=80} **Romania** | <span class="pct-badge pct-high">100%</span> | Virtually identical blue-yellow-red vertical tricolor (Chad's blue is an imperceptibly darker indigo). |
+| **Monaco & Indonesia** | ![](data/mc.png){width=80} **Monaco** | ![](data/id.png){width=80} **Indonesia** | <span class="pct-badge pct-high">98%</span> | Identical red-over-white horizontal stripes; differing only in aspect ratio (Monaco is 4:5, Indonesia is 2:3). |
+| **Norway & Svalbard** | ![](data/no.png){width=80} **Norway** | ![](data/sj.png){width=80} **Svalbard** | <span class="pct-badge pct-high">100%</span> | Official flag is identical. |
+| **United States & Outlying Is.** | ![](data/us.png){width=80} **United States** | ![](data/um.png){width=80} **U.S. Outlying Is.** | <span class="pct-badge pct-high">100%</span> | Identical 50-star design. |
+| **France & Saint Martin** | ![](data/fr.png){width=80} **France** | ![](data/mf.png){width=80} **Saint Martin** | <span class="pct-badge pct-high">100%</span> | Uses the official French national flag. |
+
+:::
+
+### 🎨 Famous Flag Families & High-Similarity Pairs
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .p-3 .h-100 .shadow-sm}
+#### 🇮🇪 Ireland vs. 🇨🇮 Côte d'Ivoire
+- **Ireland:** Green, White, Orange ![](data/ie.png){width=70}
+- **Côte d'Ivoire:** Orange, White, Green ![](data/ci.png){width=70}
+- *Mirror opposites of each other.*
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .p-3 .h-100 .shadow-sm}
+#### 🇳🇱 Netherlands vs. 🇱🇺 Luxembourg
+- **Netherlands:** Red, White, Cobalt Blue ![](data/nl.png){width=70}
+- **Luxembourg:** Red, White, Sky Blue ![](data/lu.png){width=70}
+- *Luxembourg uses a brighter sky-blue stripe and 1:2 aspect ratio.*
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .p-3 .h-100 .shadow-sm}
+#### 🇪🇬 Pan-Arab Colors
+- **Egypt:** Red, White, Black + Eagle ![](data/eg.png){width=70}
+- **Yemen:** Red, White, Black ![](data/ye.png){width=70}
+- **Syria:** Red, White, Black + Stars ![](data/sy.png){width=70}
+- **Iraq:** Red, White, Black + Takbir ![](data/iq.png){width=70}
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.card .p-3 .h-100 .shadow-sm}
+#### 🇨🇴 Gran Colombia Family
+- **Colombia:** Yellow, Blue, Red ![](data/co.png){width=70}
+- **Ecuador:** Yellow, Blue, Red + Coat of Arms ![](data/ec.png){width=70}
+- **Venezuela:** Yellow, Blue, Red + Arc of Stars ![](data/ve.png){width=70}
+:::
+:::
+
+:::
+
+:::
